@@ -12,3 +12,26 @@ keep_md: true
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r}
+library(tidyverse)
+library(COVID19)
+```
+
+```{r}
+covid_us <- covid19("USA", level = 2)
+ggplot(covid_us, aes(x = date , y = confirmed)) +
+geom_line() +
+facet_wrap(~id)
+```
+
+```{r}
+covid_us %>% dplyr::filter(id %in%
+c("USA, New York",
+"USA, Arizona",
+"USA, Utah",
+"USA, Florida")
+) %>%
+ggplot(aes(x = date , y = confirmed, color = id)) +
+geom_line()
+```
+
